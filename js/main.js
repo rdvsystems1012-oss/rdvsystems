@@ -41,3 +41,18 @@ if(contactForm){
     window.open(url, '_blank');
   });
 }
+
+const waChat = document.querySelector('.wa-chat');
+const waBtn = document.getElementById('waBtn');
+if(waChat && waBtn){
+  waBtn.addEventListener('click', () => {
+    const open = waChat.classList.toggle('is-open');
+    waBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', (e) => {
+    if(!waChat.contains(e.target)){
+      waChat.classList.remove('is-open');
+      waBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}

@@ -609,20 +609,57 @@
     transform:translateY(0);
   }
 
-  /* ---------- floating whatsapp ---------- */
-  .wa-float{
-    position:fixed;
-    bottom:24px; right:24px;
-    z-index:200;
+  /* ---------- whatsapp chat bubble ---------- */
+  .wa-chat{position:fixed;bottom:24px;right:24px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:14px;}
+  .wa-panel{
+    width:300px;
+    background:var(--black-2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 12px 32px rgba(0,0,0,0.5);
+    opacity:0;transform:translateY(14px) scale(0.96);
+    pointer-events:none;
+    transform-origin:bottom right;
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .wa-chat.is-open .wa-panel{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+  .wa-panel-head{
+    background:var(--red-bright);
+    padding:16px 18px;
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .wa-panel-head .wa-brand{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:0.03em;}
+  .wa-panel-head .wa-status{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(255,255,255,0.85);letter-spacing:0.06em;}
+  .wa-panel-head .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#57d388;margin-right:6px;}
+  .wa-panel-body{padding:18px 18px 6px;}
+  .wa-panel-body p{font-size:14.5px;line-height:1.55;color:#e9e6df;}
+  .wa-panel-btn{
+    display:block;
+    margin:14px 18px 18px;
+    background:#25D366;
+    color:#04170c;
+    font-weight:600;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    text-align:center;
+    padding:13px 16px;
+    border-radius:8px;
+    transition:transform .2s, background .2s;
+  }
+  .wa-panel-btn:hover{transform:translateY(-2px);background:#2ce073;}
+  .wa-btn{
     width:60px;height:60px;
     background:#25D366;
-    border-radius:50%;
+    border:none;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    color:#fff;
+    color:#fff;cursor:pointer;
     box-shadow:0 6px 18px rgba(37,211,102,0.35);
     transition:transform .2s, box-shadow .2s;
   }
-  .wa-float:hover{transform:scale(1.08); box-shadow:0 8px 22px rgba(37,211,102,0.5);}
+  .wa-btn:hover{transform:scale(1.08); box-shadow:0 8px 22px rgba(37,211,102,0.5);}
 
   /* ---------- footer social ---------- */
   .social{display:flex;gap:14px;}
@@ -663,6 +700,40 @@
   .contact-form .btn-primary{justify-content:center;border:none;cursor:pointer;}
   .contact-form small{color:var(--steel);font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;}
 
+  /* ---------- portfolio ---------- */
+  .portfolio{background:var(--black);}
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .portfolio-card{
+    background:var(--black-2);
+    border:1px solid var(--line);
+    overflow:hidden;
+    transition:border-color .25s, transform .25s;
+  }
+  .portfolio-card:hover{border-color:var(--red-bright); transform:translateY(-4px);}
+  .portfolio-thumb{
+    height:170px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(232,41,31,0.08);
+    border-bottom:1px solid var(--line);
+  }
+  .portfolio-thumb span{font-family:'Anton',sans-serif;font-size:15px;color:var(--steel-dark);letter-spacing:0.05em;}
+  .portfolio-body{padding:24px 26px;}
+  .portfolio-body .tag{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.1em;
+    color:var(--red-bright);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .portfolio-title{font-family:'Anton',sans-serif;font-size:19px;text-transform:uppercase;margin-bottom:8px;}
+  .portfolio-desc{color:#c9c6be;font-size:14.5px;line-height:1.6;}
+
   @media (max-width:860px){
     .navlinks{
       display:flex;
@@ -687,4 +758,5 @@
     .hero-stats{grid-template-columns:1fr 1fr; gap:32px 40px;}
     .forwhom-grid{grid-template-columns:1fr;}
     .testi-grid{grid-template-columns:1fr;}
+    .portfolio-grid{grid-template-columns:1fr;}
   }
