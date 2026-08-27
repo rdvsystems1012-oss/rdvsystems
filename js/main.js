@@ -1,10 +1,43 @@
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        e.target.classList.add('is-visible');
-        io.unobserve(e.target);
-      }
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('is-visible');
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold:0.12});
+revealEls.forEach(el => io.observe(el));
+
+const menuBtn = document.getElementById('menuBtn');
+const navlinks = document.getElementById('navlinks');
+if(menuBtn && navlinks){
+  menuBtn.addEventListener('click', () => {
+    navlinks.classList.toggle('is-open');
+    menuBtn.classList.toggle('is-open');
+    const open = navlinks.classList.contains('is-open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navlinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navlinks.classList.remove('is-open');
+      menuBtn.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
     });
-  }, {threshold:0.12});
-  revealEls.forEach(el => io.observe(el));
+  });
+}
+
+const contactForm = document.getElementById('contactForm');
+if(contactForm){
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = contactForm.querySelector('[name="nombre"]').value.trim();
+    const negocio = contactForm.querySelector('[name="negocio"]').value.trim();
+    const mensaje = contactForm.querySelector('[name="mensaje"]').value.trim();
+    let texto = `Hola RDV SYSTEMS, soy ${nombre}.`;
+    if(negocio) texto += ` Mi negocio es ${negocio}.`;
+    texto += ` Quisiera más información: ${mensaje}`;
+    const url = `https://wa.me/573223690657?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank');
+  });
+}

@@ -138,7 +138,24 @@
     transition:background .2s, transform .2s;
   }
   .nav-cta:hover{background:var(--red); transform:translateX(2px);}
-  .menu-btn{display:none;}
+  .menu-btn{
+    display:none;
+    background:none;border:none;cursor:pointer;
+    width:40px;height:40px;
+    flex-direction:column;
+    align-items:center;justify-content:center;
+    gap:5px;
+    padding:0;
+  }
+  .menu-btn span{
+    display:block;
+    width:24px;height:2px;
+    background:var(--off-white);
+    transition:transform .25s, opacity .25s;
+  }
+  .menu-btn.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-btn.is-open span:nth-child(2){opacity:0;}
+  .menu-btn.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
   /* ---------- hero ---------- */
   .hero{
@@ -592,8 +609,66 @@
     transform:translateY(0);
   }
 
+  /* ---------- floating whatsapp ---------- */
+  .wa-float{
+    position:fixed;
+    bottom:24px; right:24px;
+    z-index:200;
+    width:60px;height:60px;
+    background:#25D366;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;
+    box-shadow:0 6px 18px rgba(37,211,102,0.35);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .wa-float:hover{transform:scale(1.08); box-shadow:0 8px 22px rgba(37,211,102,0.5);}
+
+  /* ---------- contact form ---------- */
+  .contact-form{
+    margin:44px auto 0;
+    max-width:520px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    text-align:left;
+  }
+  .contact-form input,
+  .contact-form textarea{
+    width:100%;
+    background:var(--black);
+    border:1px solid var(--line);
+    color:var(--off-white);
+    font-family:'Space Grotesk',sans-serif;
+    font-size:15px;
+    padding:15px 18px;
+    transition:border-color .2s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus{outline:none;border-color:var(--red-bright);}
+  .contact-form textarea{min-height:110px;resize:vertical;}
+  .contact-form .btn-primary{justify-content:center;border:none;cursor:pointer;}
+  .contact-form small{color:var(--steel);font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;}
+
   @media (max-width:860px){
-    .navlinks{display:none;}
+    .navlinks{
+      display:flex;
+      flex-direction:column;
+      position:fixed;
+      top:71px; left:0; right:0;
+      background:rgba(10,10,11,0.97);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:18px 32px 26px;
+      gap:20px;
+      transform:translateY(-130%);
+      transition:transform .3s ease;
+      z-index:99;
+    }
+    .navlinks.is-open{transform:translateY(0);}
+    .navlinks a{font-size:14px;padding:4px 0;border-bottom:1px solid var(--line);}
+    .nav-cta{display:none;}
+    .menu-btn{display:flex;}
     .why-grid{grid-template-columns:1fr;}
     .service-row{grid-template-columns:1fr; gap:14px;}
     .hero-stats{grid-template-columns:1fr 1fr; gap:32px 40px;}
