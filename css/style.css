@@ -624,6 +624,19 @@
   }
   .wa-float:hover{transform:scale(1.08); box-shadow:0 8px 22px rgba(37,211,102,0.5);}
 
+  /* ---------- footer social ---------- */
+  .social{display:flex;gap:14px;}
+  .social a{
+    width:42px;height:42px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    border:1px solid var(--line);
+    color:var(--steel);
+    background:var(--black-2);
+    transition:border-color .2s, color .2s, transform .2s;
+  }
+  .social a:hover{color:var(--off-white); border-color:var(--red-bright); transform:translateY(-3px);}
+
   /* ---------- contact form ---------- */
   .contact-form{
     margin:44px auto 0;
