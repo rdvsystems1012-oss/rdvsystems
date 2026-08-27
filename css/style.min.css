@@ -720,3 +720,14 @@ z-index:99;
 .testi-grid{grid-template-columns:1fr;}
 .portfolio-grid{grid-template-columns:1fr;}
 }
+.honeypot{
+position:absolute !important;
+left:-9999px !important;
+top:auto;
+width:1px;
+height:1px;
+overflow:hidden;
+opacity:0;
+pointer-events:none;
+z-index:-1;
+}

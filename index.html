@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!--
+  META Y CABECERA
+  ============================================
+  - Favicon en varias resoluciones (para distintos navegadores/dispositivos).
+  - site.webmanifest: config de "app" al añadir la web al escritorio (PWA).
+  - Meta tags SEO (description, keywords, Open Graph) para buscadores y al compartir.
+  - Fuentes de Google: Anton (títulos), Space Grotesk (cuerpo), JetBrains Mono (etiquetas).
+  - Se enlaza el CSS MINIFICADO (css/style.min.css). La fuente legible está en css/style.css.
+-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="assets/img/favicon.ico">
@@ -29,12 +38,16 @@
 </head>
 <body>
 
+<!-- ============ ENCABEZADO / NAVEGACIÓN ============ -->
+<!-- Menú fijo superior. En móvil (<860px) los enlaces se ocultan y se usa el botón "hamburguesa" (.menu-btn). -->
 <header>
   <nav>
     <div class="brand">
+      <!-- Logo de la empresa (archivo externo, no base64) -->
       <img src="assets/img/logo.png" alt="RDV SYSTEMS">
       <span>RDV SYSTEMS</span>
     </div>
+    <!-- Enlaces ancla a las secciones de la página -->
     <div class="navlinks" id="navlinks">
       <a href="#servicios">Servicios</a>
       <a href="#para-quien">Para quién</a>
@@ -42,13 +55,22 @@
       <a href="#testimonios">Clientes</a>
       <a href="#proceso">Cómo trabajamos</a>
     </div>
+    <!-- Botón CTA de contacto -->
     <a href="#contacto" class="nav-cta">Hablemos</a>
+    <!-- Botón hamburguesa: se muestra solo en móvil (lo controla el JS con #menuBtn) -->
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
 </header>
 
+<!-- ============ HERO (primera pantalla) ============ -->
+<!--
+  Portada de la web. Fondo con grid y líneas de velocidad animadas.
+  - hero-grid: rejilla decorativa de fondo.
+  - speedlines: rayas animadas que dan sensación de velocidad.
+  - hero-stats: cifras clave. "60" es un PLACEHOLDER (stat-editable) pendiente de dato real.
+-->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="speedlines">
@@ -57,10 +79,12 @@
     <span style="top:71%; animation-delay:3.4s;"></span>
   </div>
   <div class="hero-inner">
+    <!-- Etiqueta superior ("eyebrow") con chevrones decorativos -->
     <div class="eyebrow">
       <div class="chevrow"><span class="chev"></span><span class="chev"></span><span class="chev"></span></div>
       <span class="eyebrow-text">Soluciones de software · Colombia</span>
     </div>
+    <!-- Título principal: el span.accent aplica el color de acento -->
     <h1 class="display">
       Tu negocio<br>
       merece moverse<br>
@@ -69,6 +93,7 @@
     <p class="hero-sub">
       <strong>Tu negocio está perdiendo ventas hoy</strong> por no estar donde tus clientes buscan. Te ponemos presencia digital, automatización y software a la medida en <strong>semanas, no meses</strong> — y sin complicarte con la tecnología.
     </p>
+    <!-- Botones de acción del hero -->
     <div class="hero-ctas">
       <a href="https://wa.me/573223690657?text=Hola%20RDV%20SYSTEMS%2C%20quiero%20impulsar%20mi%20negocio%20con%20una%20soluci%C3%B3n%20digital" target="_blank" rel="noopener" class="btn-primary">Quiero vender más hoy →</a>
       <a href="#servicios" class="btn-secondary">Ver cómo lo logramos</a>
@@ -83,6 +108,7 @@
         <div class="stat-label">A la medida del cliente</div>
       </div>
       <div>
+        <!-- +60 es un PLACEHOLDER -> cambiar por el nº real de negocios -->
         <div class="stat-num">+<span class="stat-editable">60</span></div>
         <div class="stat-label">Negocios digitalizados</div>
       </div>
@@ -90,6 +116,8 @@
   </div>
 </section>
 
+<!-- ============ SECCIÓN SERVICIOS ============ -->
+<!-- Las tres áreas de servicio de RDV. Cada .service-row es un servicio con número (R—01, R—02, R—03). -->
 <section class="services section-pad" id="servicios">
   <div class="wrap">
     <div class="section-head reveal">
@@ -149,12 +177,15 @@
         </div>
       </div>
     </div>
+    <!-- Nota de precio. "$450.000 COP" es un PLACEHOLDER -> cambiar por el valor real -->
     <div class="price-note reveal">
       Proyectos desde <b>$450.000 COP</b> · presupuesto claro y sin compromiso
     </div>
   </div>
 </section>
 
+<!-- ============ SECCIÓN "PARA QUIÉN" ============ -->
+<!-- Muestra para qué tipo de negocio es el servicio (3 carreras de interés: tiendas, emprendimientos, empresas medianas). -->
 <section class="forwhom section-pad" id="para-quien">
   <div class="wrap">
     <div class="section-head reveal">
@@ -326,6 +357,9 @@
       <a href="mailto:rdvsystems1012@gmail.com" class="btn-secondary">Enviar correo</a>
     </div>
     <form class="contact-form" id="contactForm">
+      <!-- Campo honeypot anti-spam: invisible para humanos (lo oculta el CSS).
+           Si un bot lo rellena, el JS ignora el envío. NO borrar / NO llenar. -->
+      <input type="text" name="company_website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input type="text" name="nombre" placeholder="Tu nombre" required>
       <input type="text" name="negocio" placeholder="Nombre de tu negocio">
       <textarea name="mensaje" placeholder="Cuéntanos qué necesitas..." required></textarea>
