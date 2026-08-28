@@ -105,3 +105,75 @@ if (waChat && waBtn) {
     }
   });
 }
+
+/* ------------------------------------------------------------
+   5) ANIMACIÓN DE CONTADOR (números del hero)
+   ----------------------------------------------------------------- */
+function animateCount(el) {
+  const target = parseInt(el.getAttribute('data-target'), 10);
+  const duration = 1200;
+  const start = performance.now();
+  function frame(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(target * eased);
+    if (progress < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+const countEls = document.querySelectorAll('.count-to');
+if (countEls.length && 'IntersectionObserver' in window) {
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        countIO.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  countEls.forEach(el => countIO.observe(el));
+}
+
+/* ------------------------------------------------------------
+   6) NAVBAR CON FONDO AL HACER SCROLL
+   ----------------------------------------------------------------- */
+const headerEl = document.querySelector('header');
+if (headerEl) {
+  const onScroll = () => {
+    headerEl.classList.toggle('scrolled', window.scrollY > 40);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ------------------------------------------------------------
+   7) TILT 3D EN LAS TARJETAS
+   ----------------------------------------------------------------- */
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.querySelectorAll('.card, .portfolio-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--rx', `${(-y * 6).toFixed(2)}deg`);
+      card.style.setProperty('--ry', `${(x * 6).toFixed(2)}deg`);
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+    });
+  });
+}
+
+/* ------------------------------------------------------------
+   8) PARALLAX SUTIL DEL HERO
+   ----------------------------------------------------------------- */
+const heroBg = document.querySelector('.hero-bg');
+if (heroBg) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      heroBg.style.transform = `translate3d(0, ${(y * 0.18).toFixed(1)}px, 0)`;
+    }
+  }, { passive: true });
+}

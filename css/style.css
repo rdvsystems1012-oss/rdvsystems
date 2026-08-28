@@ -802,20 +802,80 @@
   margin-top:40px;
 }
 .price-cat{
+  position:relative;
   border:1px solid var(--line);
-  background:var(--black-2);
-  border-radius:10px;
-  padding:22px 20px;
-  transition:border-color .3s ease, transform .3s ease;
+  background:linear-gradient(180deg, var(--black-2), #0e0e10);
+  border-radius:14px;
+  padding:26px 24px;
+  transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+  overflow:hidden;
 }
-.price-cat:hover{border-color:var(--red-bright); transform:translateY(-3px);}
+.price-cat::after{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--red-bright), transparent);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.price-cat:hover{border-color:var(--red-bright); transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,.45);}
+.price-cat:hover::after{opacity:1;}
+.price-cat-featured{
+  border-color:var(--red-bright);
+  background:linear-gradient(180deg, rgba(232,41,31,.08), rgba(142,11,6,.12));
+  transform:translateY(-8px);
+}
+.price-cat-featured:hover{transform:translateY(-12px);}
+.price-cat-badge{
+  position:absolute;
+  top:14px; right:-34px;
+  transform:rotate(45deg);
+  background:var(--red-bright);
+  color:#100303;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:6px 40px;
+}
+.price-cat-top{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:18px;
+}
+.price-cat-num{
+  font-family:'Anton',sans-serif;
+  font-size:30px;
+  line-height:1;
+  color:var(--line);
+  -webkit-text-stroke:1px var(--steel);
+  transition:color .3s ease, -webkit-text-stroke-color .3s ease;
+}
+.price-cat:hover .price-cat-num{color:var(--red-bright); -webkit-text-stroke-color:var(--red-bright);}
 .price-cat-title{
   font-family:'Anton',sans-serif;
   font-size:15px;
   letter-spacing:.04em;
   text-transform:uppercase;
+  color:var(--off-white);
+  line-height:1.2;
+}
+.price-cat-price{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  letter-spacing:.05em;
+  color:var(--steel);
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.price-cat-price b{
+  font-family:'Anton',sans-serif;
+  font-size:26px;
+  letter-spacing:.01em;
   color:var(--red-bright);
-  margin-bottom:16px;
 }
 .price-list{list-style:none;}
 .price-list li{
