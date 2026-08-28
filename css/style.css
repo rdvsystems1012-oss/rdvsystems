@@ -523,14 +523,6 @@
     gap:10px;
     font-size:15px;
   }
-  .footer-social-row{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    grid-column:1 / -1;
-    margin-top:8px;
-  }
   .footer-brand img{height:30px; width:auto;}
   .footer-brand span{
     font-family:'Anton',sans-serif;
@@ -557,7 +549,12 @@
   .footer-legal a:hover{color:var(--red-bright);}
   .footer-legal{grid-column:3; line-height:2;}
   .footer-copy{
-    grid-column:1 / span 3;
+    grid-column:1 / span 4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
     border-top:1px solid var(--line);
     padding-top:20px;
     color:var(--steel-dark);
@@ -820,9 +817,9 @@
     .testi-grid{grid-template-columns:1fr;}
     .portfolio-grid{grid-template-columns:1fr;}
     .footer-inner{grid-template-columns:1fr; gap:22px;}
-    .footer-tagline,.footer-contact,.footer-legal,.footer-copy,.social{grid-column:1; grid-row:auto;}
+    .footer-tagline,.footer-contact,.footer-legal,.footer-copy{grid-column:1; grid-row:auto;}
     .footer-tagline{margin-top:-12px;}
-    .footer-copy{margin-top:4px;}
+    .footer-copy{margin-top:4px; justify-content:flex-start;}
   }
 
 /* Campo honeypot anti-spam: oculto para humanos, solo los bots lo "ven" y rellenan. */
