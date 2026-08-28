@@ -34,7 +34,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.min.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -59,7 +59,7 @@
     <!-- Botón CTA de contacto -->
     <a href="#contacto" class="nav-cta">Hablemos</a>
     <!-- Botón hamburguesa: se muestra solo en móvil (lo controla el JS con #menuBtn) -->
-    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="navlinks">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -348,7 +348,7 @@
     </div>
     <div class="portfolio-grid reveal">
       <div class="portfolio-card">
-        <div class="portfolio-thumb"><span>[ Captura de la plataforma FinovaTech ]</span></div>
+        <div class="portfolio-thumb"><img src="assets/img/finovatech.png" alt="Captura de la plataforma FinovaTech"></div>
         <div class="portfolio-body">
           <span class="tag">Software educativo</span>
           <div class="portfolio-title">FinovaTech</div>
@@ -356,19 +356,19 @@
         </div>
       </div>
       <div class="portfolio-card">
-        <div class="portfolio-thumb"><span>[ Próximo proyecto ]</span></div>
+        <div class="portfolio-thumb portfolio-thumb-placeholder"><span>[ App móvil Tungig Store ]</span></div>
         <div class="portfolio-body">
-          <span class="tag">[ Categoría ]</span>
-          <div class="portfolio-title">[ Nuevo proyecto ]</div>
-          <div class="portfolio-desc">Espacio reservado para el próximo caso real de RDV SYSTEMS. Aquí verás qué se hizo y qué resultado logró.</div>
+          <span class="tag">Comercio automotriz</span>
+          <div class="portfolio-title">Tungig Store</div>
+          <div class="portfolio-desc">App móvil para comprar accesorios y productos de personalización para carros. Incluye catálogo, selección de piezas, proceso de compra y carrito para armar cada proyecto de tuning.</div>
         </div>
       </div>
       <div class="portfolio-card">
-        <div class="portfolio-thumb"><span>[ Próximo proyecto ]</span></div>
+        <div class="portfolio-thumb portfolio-thumb-placeholder"><span>[ Plataforma CursoTracker ]</span></div>
         <div class="portfolio-body">
-          <span class="tag">[ Categoría ]</span>
-          <div class="portfolio-title">[ Nuevo proyecto ]</div>
-          <div class="portfolio-desc">Espacio reservado para otro caso real de RDV SYSTEMS. Se agrega cuando esté listo.</div>
+          <span class="tag">Gestión académica</span>
+          <div class="portfolio-title">CursoTracker</div>
+          <div class="portfolio-desc">Plataforma para administrar cursos en colegios y otras instituciones educativas. Permite organizar estudiantes, docentes, horarios, asistencia y el seguimiento de cada proceso académico.</div>
         </div>
       </div>
     </div>
@@ -422,13 +422,16 @@
       <a href="https://wa.me/573223690657?text=Hola%20RDV%20SYSTEMS%2C%20quiero%20darle%20el%20primer%20paso%20digital%20a%20mi%20negocio" target="_blank" rel="noopener" class="btn-primary">Empezar ahora por WhatsApp →</a>
       <a href="mailto:rdvsystems1012@gmail.com" class="btn-secondary">Enviar correo</a>
     </div>
-    <form class="contact-form" id="contactForm">
+    <form class="contact-form" id="contactForm" aria-label="Formulario de contacto">
       <!-- Campo honeypot anti-spam: invisible para humanos (lo oculta el CSS).
            Si un bot lo rellena, el JS ignora el envío. NO borrar / NO llenar. -->
       <input type="text" name="company_website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <input type="text" name="nombre" placeholder="Tu nombre" required>
-      <input type="text" name="negocio" placeholder="Nombre de tu negocio">
-      <textarea name="mensaje" placeholder="Cuéntanos qué necesitas..." required></textarea>
+      <label class="sr-only" for="contact-nombre">Tu nombre</label>
+      <input id="contact-nombre" type="text" name="nombre" placeholder="Tu nombre" autocomplete="name" required>
+      <label class="sr-only" for="contact-negocio">Nombre de tu negocio</label>
+      <input id="contact-negocio" type="text" name="negocio" placeholder="Nombre de tu negocio" autocomplete="organization">
+      <label class="sr-only" for="contact-mensaje">Cuéntanos qué necesitas</label>
+      <textarea id="contact-mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas..." required></textarea>
       <button type="submit" class="btn-primary">Enviar por WhatsApp →</button>
       <small>Al enviar se abre WhatsApp con tu mensaje listo. Respondemos el mismo día.</small>
     </form>
@@ -441,8 +444,8 @@
       <img src="assets/img/logo.png" alt="RDV SYSTEMS">
       <span>RDV SYSTEMS</span>
     </div>
-    <div class="footer-meta">Innovative Software Solutions · Colombia</div>
-    <div class="footer-meta">
+    <div class="footer-meta footer-tagline">Innovative Software Solutions · Colombia</div>
+    <div class="footer-meta footer-contact">
       <a href="mailto:rdvsystems1012@gmail.com">rdvsystems1012@gmail.com</a> ·
       <a href="https://wa.me/573223690657" target="_blank" rel="noopener">+57 322 369 0657</a>
     </div>
@@ -453,18 +456,18 @@
     <div class="footer-copy">
       &copy; <span id="year"></span> RDV SYSTEMS. Todos los derechos reservados.
     </div>
-    <div class="social">
-      <a href="https://wa.me/573223690657" target="_blank" rel="noopener" aria-label="WhatsApp de RDV SYSTEMS">
+    <div class="social" aria-label="Redes sociales de RDV SYSTEMS">
+      <a href="https://wa.me/573223690657" target="_blank" rel="noopener" aria-label="WhatsApp de RDV SYSTEMS" title="Abrir WhatsApp">
         <svg viewBox="0 0 32 32" width="20" height="20" fill="currentColor" aria-hidden="true">
           <path d="M16.04 4C9.4 4 4.05 9.35 4.05 15.99c0 2.1.55 4.16 1.6 5.98L4 28l6.15-1.61a11.94 11.94 0 0 0 5.88 1.5h.01c6.63 0 11.98-5.35 11.98-11.99 0-3.2-1.25-6.21-3.52-8.48A11.9 11.9 0 0 0 16.04 4zm0 21.88h-.01a9.9 9.9 0 0 1-5.05-1.39l-.36-.21-3.75.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.52-5.26c0-5.49 4.47-9.95 9.96-9.95 2.66 0 5.16 1.04 7.04 2.91a9.9 9.9 0 0 1 2.92 7.05c0 5.49-4.47 9.94-9.94 9.94zm5.46-7.46c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48a9 9 0 0 1-1.66-2.06c-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/>
         </svg>
       </a>
-      <a href="https://www.instagram.com/rdvsystems1012/" target="_blank" rel="noopener" aria-label="Instagram de RDV SYSTEMS">
+      <a href="https://www.instagram.com/rdvsystems1012/" target="_self" aria-label="Instagram de RDV SYSTEMS" title="Abrir Instagram">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
           <path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.4-11.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/>
         </svg>
       </a>
-      <a href="https://www.tiktok.com/@rdv_systems1012" target="_blank" rel="noopener" aria-label="TikTok de RDV SYSTEMS">
+      <a href="https://www.tiktok.com/@rdv_systems1012" target="_self" aria-label="TikTok de RDV SYSTEMS" title="Abrir TikTok">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
           <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.3 0 .58.05.85.13V9.4a6.33 6.33 0 0 0-5.38 10.37A6.33 6.33 0 1 0 16.37 7.6a6.9 6.9 0 0 0 .22-.6v-.31z"/>
         </svg>
@@ -474,9 +477,9 @@
 </footer>
 
 <div class="wa-chat">
-  <div class="wa-panel" id="waPanel" role="dialog" aria-label="Chat de WhatsApp">
+  <div class="wa-panel" id="waPanel" role="dialog" aria-modal="true" aria-labelledby="waPanelTitle" aria-hidden="true">
     <div class="wa-panel-head">
-      <span class="wa-brand">RDV SYSTEMS</span>
+      <span class="wa-brand" id="waPanelTitle">RDV SYSTEMS</span>
       <span class="wa-status"><span class="dot"></span>En línea · respondemos hoy</span>
     </div>
     <div class="wa-panel-body">

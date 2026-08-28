@@ -8,6 +8,7 @@
     --paper: #ece8e1;
     --steel: #8a8a8f;
     --steel-dark: #4a4a4d;
+    --muted: #c9c6be;
     --line: rgba(244,241,236,0.12);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -319,7 +320,7 @@
     display:grid;
     grid-template-columns:64px 1.1fr 1.4fr;
     gap:36px;
-    padding:44px 0;
+    padding:56px 0 24px;
     border-bottom:1px solid var(--line);
     align-items:start;
     transition:background .25s;
@@ -492,18 +493,18 @@
     padding:44px 0;
   }
   .footer-inner{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:20px;
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr auto;
+    align-items:start;
+    gap:28px;
   }
   .footer-brand{
     display:flex;
     align-items:center;
     gap:10px;
+    font-size:15px;
   }
-  .footer-brand img{height:26px;}
+  .footer-brand img{height:30px; width:auto;}
   .footer-brand span{
     font-family:'Anton',sans-serif;
     font-size:14px;
@@ -515,6 +516,10 @@
     color:var(--steel);
     text-transform:uppercase;
   }
+  .footer-tagline{grid-column:1; margin-top:-16px; max-width:220px; line-height:1.7;}
+  .footer-contact{grid-column:2 / span 2; line-height:2;}
+  .footer-contact a{transition:color .2s;}
+  .footer-contact a:hover{color:var(--off-white);}
   .footer-legal{
     font-family:'JetBrains Mono',monospace;
     font-size:10.5px;
@@ -523,6 +528,17 @@
   }
   .footer-legal a{color:var(--steel); transition:color .2s;}
   .footer-legal a:hover{color:var(--red-bright);}
+  .footer-legal{grid-column:3; line-height:2;}
+  .footer-copy{
+    grid-column:1 / span 3;
+    border-top:1px solid var(--line);
+    padding-top:20px;
+    color:var(--steel-dark);
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
 
   /* ---------- for whom ---------- */
   .forwhom{background:var(--black);}
@@ -577,20 +593,6 @@
     display:flex;
     flex-direction:column;
     gap:20px;
-  }
-  .testi-quote{
-    font-size:16px;
-    line-height:1.65;
-    color:#e9e6df;
-  }
-  .testi-quote::before{
-    content:"“";
-    display:block;
-    font-family:'Anton',sans-serif;
-    font-size:52px;
-    line-height:0.6;
-    color:var(--red-bright);
-    margin-bottom:14px;
   }
   .testi-who{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--steel); letter-spacing:0.08em; text-transform:uppercase;}
   .testi-who b{color:var(--off-white); font-weight:500;}
@@ -682,17 +684,21 @@
   .wa-btn:hover{transform:scale(1.08); box-shadow:0 8px 22px rgba(37,211,102,0.5);}
 
   /* ---------- footer social ---------- */
-  .social{display:flex;gap:14px;}
+  .social{display:flex;gap:10px; grid-column:4; grid-row:1 / span 2; position:relative; z-index:300;}
   .social a{
     width:42px;height:42px;
     display:flex;align-items:center;justify-content:center;
+    position:relative;z-index:1;cursor:pointer;
+    touch-action:manipulation;
     border-radius:50%;
     border:1px solid var(--line);
     color:var(--steel);
     background:var(--black-2);
     transition:border-color .2s, color .2s, transform .2s;
   }
+  .social a svg{pointer-events:none;}
   .social a:hover{color:var(--off-white); border-color:var(--red-bright); transform:translateY(-3px);}
+  .social a:focus-visible{color:var(--off-white); border-color:var(--red-bright); transform:translateY(-2px);}
 
   /* ---------- contact form ---------- */
   .contact-form{
@@ -716,6 +722,10 @@
   }
   .contact-form input:focus,
   .contact-form textarea:focus{outline:none;border-color:var(--red-bright);}
+  .contact-form input:focus-visible,
+  .contact-form textarea:focus-visible,
+  a:focus-visible,
+  button:focus-visible{outline:2px solid var(--red-bright);outline-offset:3px;}
   .contact-form textarea{min-height:110px;resize:vertical;}
   .contact-form .btn-primary{justify-content:center;border:none;cursor:pointer;}
   .contact-form small{color:var(--steel);font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;}
@@ -740,6 +750,7 @@
     background:rgba(232,41,31,0.08);
     border-bottom:1px solid var(--line);
   }
+  .portfolio-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
   .portfolio-thumb span{font-family:'Anton',sans-serif;font-size:15px;color:var(--steel-dark);letter-spacing:0.05em;}
   .portfolio-body{padding:24px 26px;}
   .portfolio-body .tag{
@@ -766,10 +777,12 @@
       padding:18px 32px 26px;
       gap:20px;
       transform:translateY(-130%);
+      visibility:hidden;
+      pointer-events:none;
       transition:transform .3s ease;
       z-index:99;
     }
-    .navlinks.is-open{transform:translateY(0);}
+    .navlinks.is-open{transform:translateY(0);visibility:visible;pointer-events:auto;}
     .navlinks a{font-size:14px;padding:4px 0;border-bottom:1px solid var(--line);}
     .nav-cta{display:none;}
     .menu-btn{display:flex;}
@@ -779,6 +792,10 @@
     .forwhom-grid{grid-template-columns:1fr;}
     .testi-grid{grid-template-columns:1fr;}
     .portfolio-grid{grid-template-columns:1fr;}
+    .footer-inner{grid-template-columns:1fr; gap:22px;}
+    .footer-tagline,.footer-contact,.footer-legal,.footer-copy,.social{grid-column:1; grid-row:auto;}
+    .footer-tagline{margin-top:-12px;}
+    .footer-copy{margin-top:4px;}
   }
 
 /* Campo honeypot anti-spam: oculto para humanos, solo los bots lo "ven" y rellenan. */

@@ -13,17 +13,19 @@
    Usa IntersectionObserver (compatible con navegadores modernos).
    ------------------------------------------------------------ */
 const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      // Añade la clase que hace visible el elemento (transición CSS)
-      e.target.classList.add('is-visible');
-      // Deja de observarlo: la animación ya se disparó
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12 });
-revealEls.forEach(el => io.observe(el));
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+} else {
+  revealEls.forEach(el => el.classList.add('is-visible'));
+}
 
 /* ------------------------------------------------------------
    2) MENÚ HAMBURGUESA (móvil)
@@ -39,6 +41,7 @@ if (menuBtn && navlinks) {
     menuBtn.classList.toggle('is-open');
     const open = navlinks.classList.contains('is-open');
     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
   });
   // Cerrar el menú al elegir una sección
   navlinks.querySelectorAll('a').forEach(a => {
@@ -46,6 +49,7 @@ if (menuBtn && navlinks) {
       navlinks.classList.remove('is-open');
       menuBtn.classList.remove('is-open');
       menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Abrir menú');
     });
   });
 }
@@ -80,7 +84,7 @@ if (contactForm) {
     // Número de WhatsApp de RDV SYSTEMS (reemplazar aquí si cambia)
     const numero = '573223690657';
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
+    window.open(url, '_blank', 'noopener,noreferrer');
   });
 }
 
@@ -96,12 +100,14 @@ if (waChat && waBtn) {
   waBtn.addEventListener('click', () => {
     const open = waChat.classList.toggle('is-open');
     waBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.getElementById('waPanel').setAttribute('aria-hidden', open ? 'false' : 'true');
   });
   // Cerrar al hacer clic fuera del área del chat
   document.addEventListener('click', (e) => {
     if (!waChat.contains(e.target)) {
       waChat.classList.remove('is-open');
       waBtn.setAttribute('aria-expanded', 'false');
+      document.getElementById('waPanel').setAttribute('aria-hidden', 'true');
     }
   });
 }
@@ -122,7 +128,9 @@ function animateCount(el) {
   requestAnimationFrame(frame);
 }
 const countEls = document.querySelectorAll('.count-to');
-if (countEls.length && 'IntersectionObserver' in window) {
+if (countEls.length && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  countEls.forEach(el => { el.textContent = el.getAttribute('data-target'); });
+} else if (countEls.length && 'IntersectionObserver' in window) {
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -166,20 +174,7 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
 }
 
 /* ------------------------------------------------------------
-   8) PARALLAX SUTIL DEL HERO
-   ----------------------------------------------------------------- */
-const heroBg = document.querySelector('.hero-bg');
-if (heroBg) {
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    if (y < window.innerHeight) {
-      heroBg.style.transform = `translate3d(0, ${(y * 0.18).toFixed(1)}px, 0)`;
-    }
-  }, { passive: true });
-}
-
-/* ------------------------------------------------------------
-   9) AÑO DEL COPYRIGHT (dinámico)
+   8) AÑO DEL COPYRIGHT (dinámico)
    Coloca el año actual en el elemento #year del footer.
    ----------------------------------------------------------------- */
 const yearEl = document.getElementById('year');
