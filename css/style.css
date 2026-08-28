@@ -523,6 +523,14 @@
     gap:10px;
     font-size:15px;
   }
+  .footer-social-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    grid-column:1 / -1;
+    margin-top:8px;
+  }
   .footer-brand img{height:30px; width:auto;}
   .footer-brand span{
     font-family:'Anton',sans-serif;
@@ -703,7 +711,7 @@
   .wa-btn:hover{transform:scale(1.08); box-shadow:0 8px 22px rgba(37,211,102,0.5);}
 
   /* ---------- footer social ---------- */
-  .social{display:flex;gap:10px; grid-column:4; grid-row:1 / span 2; position:relative; z-index:300;}
+  .social{display:flex;gap:10px; align-items:center; justify-content:center; position:relative; z-index:300;}
   .social a{
     width:42px;height:42px;
     display:flex;align-items:center;justify-content:center;
