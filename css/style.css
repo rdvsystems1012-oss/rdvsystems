@@ -251,6 +251,18 @@
     transition:border-color .2s, color .2s;
   }
   .btn-secondary:hover{border-color:var(--red-bright); color:var(--red-bright);}
+  .hero-trust{
+    margin-top:18px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.03em;
+    color:var(--muted);
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .hero-trust span{color:var(--red-bright);}
 
   .hero-stats{
     margin-top:76px;
@@ -503,6 +515,14 @@
     color:var(--steel);
     text-transform:uppercase;
   }
+  .footer-legal{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    color:var(--steel);
+  }
+  .footer-legal a{color:var(--steel); transition:color .2s;}
+  .footer-legal a:hover{color:var(--red-bright);}
 
   /* ---------- for whom ---------- */
   .forwhom{background:var(--black);}

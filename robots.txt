@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /privacidad.html
+Disallow: /terminos.html
+
+Sitemap: https://rdvsystems.com/sitemap.xml
