@@ -177,3 +177,12 @@ if (heroBg) {
     }
   }, { passive: true });
 }
+
+/* ------------------------------------------------------------
+   9) AÑO DEL COPYRIGHT (dinámico)
+   Coloca el año actual en el elemento #year del footer.
+   ----------------------------------------------------------------- */
+const yearEl = document.getElementById('year');
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
