@@ -264,6 +264,25 @@
     align-items:center;
   }
   .hero-trust span{color:var(--red-bright);}
+  .hero-trust-row{
+    margin-top:22px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 14px;
+    max-width:640px;
+  }
+  .hero-trust-row span{
+    display:inline-flex;
+    align-items:center;
+    padding:8px 12px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,0.02);
+    color:var(--off-white);
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
 
   .hero-stats{
     margin-top:76px;
